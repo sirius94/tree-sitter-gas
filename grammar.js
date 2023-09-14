@@ -68,6 +68,7 @@ module.exports = grammar({
     ),
 
     instruction: $ => seq(
+      optional(seq($.instruction_prefix, $._inline_space)),
       alias($.symbol, $.instruction_name),
       optional(seq(
         $._inline_space,
@@ -75,6 +76,14 @@ module.exports = grammar({
         $._operand,
         repeat(seq(',', $._operand))
       ))
+    ),
+
+    instruction_prefix: $ => choice(
+      ci('data16'), ci('addr16'), ci('data32'), ci('addr32'),
+      ci('lock'),
+      ci('wait'),
+      ci('rep'), ci('repe'), ci('repne'),
+      /[rR][eE][xX](64)?[xX]?[yY]?[zZ]?/
     ),
 
     _operand: $ => choice(
@@ -143,3 +152,13 @@ module.exports = grammar({
     _eol: $ => /\r\n|\n\r|\n|\r|;/
   }
 });
+
+/** Make case insensitive regex. */
+function ci(str) {
+  const lower = str.toLowerCase();
+  const upper = str.toUpperCase();
+  let regex = "";
+  for (let i = 0; i < str.length; i++)
+    regex += `[${lower[i]}${upper[i]}]`;
+  return RegExp(regex);
+}

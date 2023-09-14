@@ -134,6 +134,10 @@
           "named": true
         },
         {
+          "type": "instruction_prefix",
+          "named": true
+        },
+        {
           "type": "number",
           "named": true
         },
@@ -154,6 +158,11 @@
   },
   {
     "type": "instruction_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "instruction_prefix",
     "named": true,
     "fields": {}
   },

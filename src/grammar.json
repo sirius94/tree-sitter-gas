@@ -1,5 +1,5 @@
 {
-  "name": "YOUR_LANGUAGE_NAME",
+  "name": "gas",
   "rules": {
     "source_file": {
       "type": "SEQ",
@@ -327,6 +327,27 @@
       "type": "SEQ",
       "members": [
         {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "instruction_prefix"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_inline_space"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
@@ -383,6 +404,51 @@
               "type": "BLANK"
             }
           ]
+        }
+      ]
+    },
+    "instruction_prefix": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[dD][aA][tT][aA][11][66]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[aA][dD][dD][rR][11][66]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[dD][aA][tT][aA][33][22]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[aA][dD][dD][rR][33][22]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[lL][oO][cC][kK]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[wW][aA][iI][tT]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[rR][eE][pP]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[rR][eE][pP][eE]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[rR][eE][pP][nN][eE]"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[rR][eE][xX](64)?[xX]?[yY]?[zZ]?"
         }
       ]
     },
