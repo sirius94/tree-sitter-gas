@@ -38,14 +38,22 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "char",
           "named": true
         },
         {
+          "type": "number",
+          "named": true
+        },
+        {
           "type": "string",
+          "named": true
+        },
+        {
+          "type": "symbol",
           "named": true
         }
       ]
@@ -199,11 +207,6 @@
     }
   },
   {
-    "type": "string",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "symbol",
     "named": true,
     "fields": {}
@@ -212,10 +215,6 @@
     "type": "type",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "\"",
-    "named": false
   },
   {
     "type": "$",
@@ -283,6 +282,10 @@
   },
   {
     "type": "register",
+    "named": true
+  },
+  {
+    "type": "string",
     "named": true
   }
 ]

@@ -13,7 +13,8 @@ leal (%edx,%eax,2), %eax
 (source_file
   (instruction
     (instruction_name)
-    (constant)
+    (constant
+      (number))
     (register))
   (instruction
     (instruction_name)

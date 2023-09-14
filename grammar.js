@@ -120,15 +120,13 @@ module.exports = grammar({
       $._operand_symbol
     )),
 
-    constant: $ => seq('$', choice($._integer, $._float, $._identifier, $.string, $.char)),
+    constant: $ => seq('$', choice($.number, $.symbol, $.string, $.char)),
     
     char: $ => seq('\'', choice($._character_escapes, /[^\\']/), optional('\'')),
 
     _character_escapes: $ => /\\b|\\f|\\n|\\r|\\t|\\\\|\\"|\\'/,
 
-    string: $ => seq('"', repeat(choice($._string_escapes, /[^\n\r\\"]/)), '"'),
-
-    _string_escapes: $ => /\\[0-9]{3}|\\x[0-9a-fA-F]{2}|\\b|\\f|\\n|\\r|\\t|\\\\|\\"/,
+    string: $ => /"(\\[0-9]{3}|\\x[0-9a-fA-F]{2}|\\b|\\f|\\n|\\r|\\t|\\\\|\\"|[^\n\r\\"])*"/,
 
     number: $ => choice($._integer, $._float),
 

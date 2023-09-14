@@ -2,5 +2,9 @@
   "name": "tree-sitter-gas",
   "module": "grammar.js",
   "type": "commonjs",
-  "main": "bindings/node"
+  "main": "bindings/node",
+  "tree-sitter": [{
+    "scope": "source.gas",
+    "file-types": ["s"]
+  }]
 }
