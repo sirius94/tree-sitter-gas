@@ -1,0 +1,6 @@
+{
+  "name": "tree-sitter-gas",
+  "module": "grammar.js",
+  "type": "commonjs",
+  "main": "bindings/node"
+}

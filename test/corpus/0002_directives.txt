@@ -1,0 +1,93 @@
+================================================================================
+directives
+================================================================================
+.set A, '\n
+.set MY_CONST, 0xff
+.global _start
+.ascii "hello world\n"
+.global a/*a*/
+.global b#b
+.global c #c
+.global d /*d*/
+.global e   /*e*/  /*eee*/ 
+.global f/*f*/  /*ff*//*fff*/  #ffff
+.global g/*
+g
+*/.global h
+--------------------------------------------------------------------------------
+(source_file
+  (statement
+    (directive
+      (directive_name)
+      (directive_arg
+        (symbol))
+      (directive_arg
+        (char))))
+  (statement
+    (directive
+      (directive_name)
+      (directive_arg
+        (symbol))
+      (directive_arg
+        (number))))
+  (statement
+    (directive
+      (directive_name)
+      (directive_arg
+        (symbol))))
+  (statement
+    (directive
+      (directive_name)
+      (directive_arg
+        (string))))
+  (statement
+    (directive
+      (directive_name)
+      (directive_arg
+        (symbol))))
+  (comment)
+  (statement
+    (directive
+      (directive_name)
+      (directive_arg
+        (symbol))))
+  (comment)
+  (statement
+    (directive
+      (directive_name)
+      (directive_arg
+        (symbol))))
+  (comment)
+  (statement
+    (directive
+      (directive_name)
+      (directive_arg
+        (symbol))))
+  (comment)
+  (statement
+    (directive
+      (directive_name)
+      (directive_arg
+        (symbol))))
+  (comment)
+  (comment)
+  (statement
+    (directive
+      (directive_name)
+      (directive_arg
+        (symbol))))
+  (comment)
+  (comment)
+  (comment)
+  (comment)
+  (statement
+    (directive
+      (directive_name)
+      (directive_arg
+        (symbol))))
+  (comment)
+  (statement
+    (directive
+      (directive_name)
+      (directive_arg
+        (symbol)))))

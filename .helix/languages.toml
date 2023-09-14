@@ -1,0 +1,7 @@
+[[language]]
+name = "tree-sitter-test"
+scope = "source.tree-sitter-test"
+file-types = ["txt"]
+indent = { tab-width = 2, unit = "  " }
+roots = ["corpus"]
+grammar = "scheme"
