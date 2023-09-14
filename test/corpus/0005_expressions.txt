@@ -1,0 +1,31 @@
+================================================================================
+expressions
+================================================================================
+a = 3 * (2 - 5)
+b = . - a
+	.long	.L71-.L6
+c=3+b
+--------------------------------------------------------------------------------
+(source_file
+  (assignment
+    (symbol)
+    (expression
+      (number)
+      (expression
+        (number)
+        (number))))
+  (assignment
+    (symbol)
+    (expression
+      (symbol)
+      (symbol)))
+  (directive
+    (directive_name)
+    (expression
+      (symbol)
+      (symbol)))
+  (assignment
+    (symbol)
+    (expression
+      (number)
+      (symbol))))

@@ -7,34 +7,88 @@ module.exports = grammar({
     source_file: $ => seq(
       repeat(choice(
         $._eol,
-        seq($._statement, $._eol)
+        seq(optional($.label), $._statement, $._eol),
+        seq($.label, $._eol)
       )),
+      optional($.label),
       optional($._statement)
     ),
 
-    _statement: $ => choice($.directive, $.instruction),
+    _statement: $ => choice(
+      $.directive, 
+      $.instruction, 
+      $.assignment
+    ),
+
+    label: $ => /[a-zA-Z_\.\$][a-zA-Z0-9_\.\$]*:/,
 
     directive: $ => seq(
       $.directive_name,
-      $._inline_space,
-      $.directive_arg,
-      repeat(seq(',', $.directive_arg))
+      optional(seq(
+        $._inline_space,
+        $._directive_arg,
+        repeat(seq(',', optional($._directive_arg)))
+      ))
     ),
 
-    directive_name: $ => seq('.', $._identifier),
+    directive_name: $ => /\.[a-zA-Z_\.\$][a-zA-Z0-9_\.\$]*/,
 
-    directive_arg: $ => choice($.symbol, $.char, $.string, $.number),
+    _directive_arg: $ => choice(
+      $.symbol, 
+      $.type, 
+      $.char, 
+      $.string, 
+      $.number, 
+      $.expression
+    ),
+
+    type: $ => seq('@', $._identifier),
+
+    assignment: $ => seq(
+      $.symbol,
+      repeat(choice($._inline_space, $.comment)),
+      '=',
+      $.expression
+    ),
+
+    expression: $ => choice(
+      seq(
+        $._sub_expression,
+        repeat1(seq(choice('-', '+', '*', '/', '='), $._sub_expression))
+      ),
+      $._paren_expression
+    ),
+
+    _paren_expression: $ => seq('(', $.expression, ')'),
+
+    _sub_expression: $ => choice(
+      $.symbol,
+      $.number,
+      $._paren_expression
+    ),
 
     instruction: $ => seq(
-      $.instruction_name,
-      $._inline_space,
-      $._operand,
-      repeat(seq(',', $._operand))
+      alias($.symbol, $.instruction_name),
+      optional(seq(
+        $._inline_space,
+        optional('*'),
+        $._operand,
+        repeat(seq(',', $._operand))
+      ))
     ),
 
-    instruction_name: $ => /[a-zA-Z0-9]+/,
+    _operand: $ => choice(
+      $.register, 
+      $._operand_symbol, 
+      $.char, 
+      $.string, 
+      $.number, 
+      $.constant, 
+      $._displacement_expression
+    ),
 
-    _operand: $ => choice($.register, $.symbol, $.char, $.string, $.number, $.constant, $._displacement_expression),
+     // symbols in operands cannot start with $
+    _operand_symbol: $ => alias(/[a-zA-Z_\.][a-zA-Z0-9_\.\$]*/, $.symbol),
 
     _displacement_expression: $ => seq(
       optional(seq($.register, ':')),
@@ -52,7 +106,10 @@ module.exports = grammar({
       ')'
     ),
 
-    _displacement_expression_offset: $ => prec(1, choice(alias($._integer, $.number), $.symbol)),
+    _displacement_expression_offset: $ => prec(1, choice(
+      alias($._integer, $.number),
+      $._operand_symbol
+    )),
 
     constant: $ => seq('$', choice($._integer, $._float, $._identifier, $.string, $.char)),
     
@@ -72,7 +129,7 @@ module.exports = grammar({
 
     symbol: $ => $._identifier,
 
-    _identifier: $ => /[a-zA-Z_\.\$][a-zA-Z_\.\$]*/,
+    _identifier: $ => /[a-zA-Z_\.\$][a-zA-Z0-9_\.\$]*/,
 
     register: $ => /%[a-zA-Z][a-zA-Z0-9]*/,
 
@@ -83,6 +140,6 @@ module.exports = grammar({
 
     _inline_space: $ => /[\t ]+/,
 
-    _eol: $ => /\r\n|\n\r|\n|\r/
+    _eol: $ => /\r\n|\n\r|\n|\r|;/
   }
 });

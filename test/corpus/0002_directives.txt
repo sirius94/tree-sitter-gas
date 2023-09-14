@@ -15,68 +15,60 @@ directives
 g
 */
 .global h
+        .section        .text.unlikely,"ax",@progbits
 --------------------------------------------------------------------------------
 (source_file
   (directive
     (directive_name)
-    (directive_arg
-      (symbol))
-    (directive_arg
-      (char)))
+    (symbol)
+    (char))
   (directive
     (directive_name)
-    (directive_arg
-      (symbol))
-    (directive_arg
-      (number)))
+    (symbol)
+    (number))
   (directive
     (directive_name)
-    (directive_arg
-      (symbol)))
+    (symbol))
   (directive
     (directive_name)
-    (directive_arg
-      (string)))
+    (string))
   (directive
     (directive_name)
-    (directive_arg
-      (symbol)))
+    (symbol))
   (comment)
   (directive
     (directive_name)
-    (directive_arg
-      (symbol)))
+    (symbol))
   (comment)
   (directive
     (directive_name)
-    (directive_arg
-      (symbol)))
+    (symbol))
   (comment)
   (directive
     (directive_name)
-    (directive_arg
-      (symbol)))
+    (symbol))
   (comment)
   (directive
     (directive_name)
-    (directive_arg
-      (symbol)))
+    (symbol))
   (comment)
   (comment)
   (directive
     (directive_name)
-    (directive_arg
-      (symbol)))
+    (symbol))
   (comment)
   (comment)
   (comment)
   (comment)
   (directive
     (directive_name)
-    (directive_arg
-      (symbol)))
+    (symbol))
   (comment)
   (directive
     (directive_name)
-    (directive_arg
-      (symbol))))
+    (symbol))
+  (directive
+    (directive_name)
+    (symbol)
+    (string)
+    (type)))
