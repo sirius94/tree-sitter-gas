@@ -97,7 +97,12 @@ module.exports = grammar({
     ),
 
      // symbols in operands cannot start with $
-    _operand_symbol: $ => alias(/[a-zA-Z_\.][a-zA-Z0-9_\.\$]*/, $.symbol),
+    _operand_symbol: $ => seq(
+      alias(/[a-zA-Z_\.][a-zA-Z0-9_\.\$]*/, $.symbol),
+      optional($.operand_modifier)
+    ),
+
+    operand_modifier: $ => /@[a-zA-Z0-9]+/,
 
     _displacement_expression: $ => seq(
       optional(seq($.register, ':')),

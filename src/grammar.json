@@ -486,13 +486,34 @@
       ]
     },
     "_operand_symbol": {
-      "type": "ALIAS",
-      "content": {
-        "type": "PATTERN",
-        "value": "[a-zA-Z_\\.][a-zA-Z0-9_\\.\\$]*"
-      },
-      "named": true,
-      "value": "symbol"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "[a-zA-Z_\\.][a-zA-Z0-9_\\.\\$]*"
+          },
+          "named": true,
+          "value": "symbol"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "operand_modifier"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "operand_modifier": {
+      "type": "PATTERN",
+      "value": "@[a-zA-Z0-9]+"
     },
     "_displacement_expression": {
       "type": "SEQ",

@@ -150,6 +150,10 @@
           "named": true
         },
         {
+          "type": "operand_modifier",
+          "named": true
+        },
+        {
           "type": "register",
           "named": true
         },
@@ -278,6 +282,10 @@
   },
   {
     "type": "label",
+    "named": true
+  },
+  {
+    "type": "operand_modifier",
     "named": true
   },
   {

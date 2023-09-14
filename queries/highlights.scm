@@ -11,6 +11,7 @@
 (char) @char
 (type) @type
 (constant "$" @constant)
+(operand_modifier) @attribute
 
 (expression
   "-" @operator
