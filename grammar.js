@@ -1,5 +1,5 @@
 module.exports = grammar({
-  name: 'YOUR_LANGUAGE_NAME',
+  name: 'gas',
 
   extras: $ => [$._inline_space, $.comment],
 
