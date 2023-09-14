@@ -159,6 +159,9 @@ function ci(str) {
   const upper = str.toUpperCase();
   let regex = "";
   for (let i = 0; i < str.length; i++)
-    regex += `[${lower[i]}${upper[i]}]`;
+    if (lower[i] == upper[i])
+      regex += str[i];
+    else
+      regex += `[${lower[i]}${upper[i]}]`;
   return RegExp(regex);
 }

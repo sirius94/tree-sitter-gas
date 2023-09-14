@@ -412,19 +412,19 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "[dD][aA][tT][aA][11][66]"
+          "value": "[dD][aA][tT][aA]16"
         },
         {
           "type": "PATTERN",
-          "value": "[aA][dD][dD][rR][11][66]"
+          "value": "[aA][dD][dD][rR]16"
         },
         {
           "type": "PATTERN",
-          "value": "[dD][aA][tT][aA][33][22]"
+          "value": "[dD][aA][tT][aA]32"
         },
         {
           "type": "PATTERN",
-          "value": "[aA][dD][dD][rR][33][22]"
+          "value": "[aA][dD][dD][rR]32"
         },
         {
           "type": "PATTERN",
