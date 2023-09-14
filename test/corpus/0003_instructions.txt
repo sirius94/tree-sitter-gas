@@ -10,4 +10,45 @@ movl (%ecx), %edx
 leal 8(,%eax,4), %eax
 leal (%edx,%eax,2), %eax
 --------------------------------------------------------------------------------
-(source_file)
+(source_file
+  (instruction
+    (instruction_name)
+    (constant)
+    (register))
+  (instruction
+    (instruction_name)
+    (symbol)
+    (register))
+  (instruction
+    (instruction_name)
+    (number)
+    (register)
+    (register))
+  (instruction
+    (instruction_name)
+    (number)
+    (register)
+    (register)
+    (number)
+    (register))
+  (instruction
+    (instruction_name)
+    (number)
+    (register)
+    (register))
+  (instruction
+    (instruction_name)
+    (register)
+    (register))
+  (instruction
+    (instruction_name)
+    (number)
+    (register)
+    (number)
+    (register))
+  (instruction
+    (instruction_name)
+    (register)
+    (register)
+    (number)
+    (register)))

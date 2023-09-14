@@ -13,81 +13,70 @@ directives
 .global f/*f*/  /*ff*//*fff*/  #ffff
 .global g/*
 g
-*/.global h
+*/
+.global h
 --------------------------------------------------------------------------------
 (source_file
-  (statement
-    (directive
-      (directive_name)
-      (directive_arg
-        (symbol))
-      (directive_arg
-        (char))))
-  (statement
-    (directive
-      (directive_name)
-      (directive_arg
-        (symbol))
-      (directive_arg
-        (number))))
-  (statement
-    (directive
-      (directive_name)
-      (directive_arg
-        (symbol))))
-  (statement
-    (directive
-      (directive_name)
-      (directive_arg
-        (string))))
-  (statement
-    (directive
-      (directive_name)
-      (directive_arg
-        (symbol))))
+  (directive
+    (directive_name)
+    (directive_arg
+      (symbol))
+    (directive_arg
+      (char)))
+  (directive
+    (directive_name)
+    (directive_arg
+      (symbol))
+    (directive_arg
+      (number)))
+  (directive
+    (directive_name)
+    (directive_arg
+      (symbol)))
+  (directive
+    (directive_name)
+    (directive_arg
+      (string)))
+  (directive
+    (directive_name)
+    (directive_arg
+      (symbol)))
   (comment)
-  (statement
-    (directive
-      (directive_name)
-      (directive_arg
-        (symbol))))
+  (directive
+    (directive_name)
+    (directive_arg
+      (symbol)))
   (comment)
-  (statement
-    (directive
-      (directive_name)
-      (directive_arg
-        (symbol))))
+  (directive
+    (directive_name)
+    (directive_arg
+      (symbol)))
   (comment)
-  (statement
-    (directive
-      (directive_name)
-      (directive_arg
-        (symbol))))
+  (directive
+    (directive_name)
+    (directive_arg
+      (symbol)))
   (comment)
-  (statement
-    (directive
-      (directive_name)
-      (directive_arg
-        (symbol))))
+  (directive
+    (directive_name)
+    (directive_arg
+      (symbol)))
   (comment)
   (comment)
-  (statement
-    (directive
-      (directive_name)
-      (directive_arg
-        (symbol))))
+  (directive
+    (directive_name)
+    (directive_arg
+      (symbol)))
   (comment)
   (comment)
   (comment)
   (comment)
-  (statement
-    (directive
-      (directive_name)
-      (directive_arg
-        (symbol))))
+  (directive
+    (directive_name)
+    (directive_arg
+      (symbol)))
   (comment)
-  (statement
-    (directive
-      (directive_name)
-      (directive_arg
-        (symbol)))))
+  (directive
+    (directive_name)
+    (directive_arg
+      (symbol))))

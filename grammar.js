@@ -1,20 +1,16 @@
-const symbol = /[a-zA-Z_\.\$][a-zA-Z_\.\$]*/
-const string_escapes = /\\[0-9]{3}|\\x[0-9a-fA-F]{2}|\\b|\\f|\\n|\\r|\\t|\\\\|\\"/
-const character_escapes = /\\b|\\f|\\n|\\r|\\t|\\\\|\\"|\\'/
-const integer = /-?(0[bB][01]*|0[0-7]*|[1-9][0-9]*|0[xX][0-9a-fA-F]+)/
-const float = /0[a-zA-Z][+\-]?[0-9]*\.?[0-9]*([eE][+\-]?[0-9]+)?/
-const eol = /\r\n|\n\r|\n|\r/
-
 module.exports = grammar({
   name: 'YOUR_LANGUAGE_NAME',
 
-  extras: $ => [$.comment, $._inline_space],
+  extras: $ => [$._inline_space, $.comment],
 
   rules: {
-    source_file: $ => repeat(choice(
-      $._until_eol,
-      seq($._statement, $._until_eol)
-    )),
+    source_file: $ => seq(
+      repeat(choice(
+        $._eol,
+        seq($._statement, $._eol)
+      )),
+      optional($._statement)
+    ),
 
     _statement: $ => choice($.directive, $.instruction),
 
@@ -25,7 +21,7 @@ module.exports = grammar({
       repeat(seq(',', $.directive_arg))
     ),
 
-    directive_name: $ => seq('.', symbol),
+    directive_name: $ => seq('.', $._identifier),
 
     directive_arg: $ => choice($.symbol, $.char, $.string, $.number),
 
@@ -36,7 +32,7 @@ module.exports = grammar({
       repeat(seq(',', $._operand))
     ),
 
-    instruction_name: $ => symbol,
+    instruction_name: $ => /[a-zA-Z0-9]+/,
 
     _operand: $ => choice($.register, $.symbol, $.char, $.string, $.number, $.constant, $._displacement_expression),
 
@@ -56,35 +52,37 @@ module.exports = grammar({
       ')'
     ),
 
-    _displacement_expression_offset: $ => prec(1, choice(alias(integer, $.number), $.symbol)),
+    _displacement_expression_offset: $ => prec(1, choice(alias($._integer, $.number), $.symbol)),
 
-    constant: $ => seq('$', choice(integer, float, symbol, $.string, $.char)),
+    constant: $ => seq('$', choice($._integer, $._float, $._identifier, $.string, $.char)),
     
-    char: $ => seq('\'', choice(character_escapes, /[^\\']/), optional('\'')),
+    char: $ => seq('\'', choice($._character_escapes, /[^\\']/), optional('\'')),
 
-    string: $ => seq('"', repeat(choice(string_escapes, /[^\n\r\\"]/)), '"'),
+    _character_escapes: $ => /\\b|\\f|\\n|\\r|\\t|\\\\|\\"|\\'/,
 
-    number: $ => choice(integer, float),
+    string: $ => seq('"', repeat(choice($._string_escapes, /[^\n\r\\"]/)), '"'),
 
-    symbol: $ => symbol,
+    _string_escapes: $ => /\\[0-9]{3}|\\x[0-9a-fA-F]{2}|\\b|\\f|\\n|\\r|\\t|\\\\|\\"/,
+
+    number: $ => choice($._integer, $._float),
+
+    _integer: $ => /-?(0[bB][01]*|0[0-7]*|[1-9][0-9]*|0[xX][0-9a-fA-F]+)/,
+
+    _float: $ => /0[a-zA-Z][+\-]?[0-9]*\.?[0-9]*([eE][+\-]?[0-9]+)?/,
+
+    symbol: $ => $._identifier,
+
+    _identifier: $ => /[a-zA-Z_\.\$][a-zA-Z_\.\$]*/,
 
     register: $ => /%[a-zA-Z][a-zA-Z0-9]*/,
 
-    _until_eol: $ => seq(
-      repeat($.comment),
-      choice(
-        alias($._line_comment, $.comment),
-        alias($._block_comment, $.comment),
-        eol
-      )
+    comment: $ => choice(
+      /#[^\n]*/,
+      seq('/*', repeat(choice(/./, $._eol)), '*/')
     ),
 
-    comment: $ => seq('/*', repeat(/./), '*/'),
-    
-    _line_comment: $ => /#[^\n]*/,
-   
-    _block_comment: $ => seq('/*', repeat(/./), eol, repeat(choice(/./, eol)) ,'*/'),
+    _inline_space: $ => /[\t ]+/,
 
-    _inline_space: $ => /[\t ]+/
+    _eol: $ => /\r\n|\n\r|\n|\r/
   }
 });

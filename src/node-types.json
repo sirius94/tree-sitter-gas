@@ -119,11 +119,6 @@
     }
   },
   {
-    "type": "instruction_name",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "number",
     "named": true,
     "fields": {}
@@ -136,10 +131,6 @@
       "multiple": true,
       "required": false,
       "types": [
-        {
-          "type": "comment",
-          "named": true
-        },
         {
           "type": "directive",
           "named": true
@@ -200,6 +191,10 @@
   {
     "type": ":",
     "named": false
+  },
+  {
+    "type": "instruction_name",
+    "named": true
   },
   {
     "type": "register",
