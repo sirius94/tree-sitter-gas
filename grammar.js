@@ -104,20 +104,26 @@ module.exports = grammar({
 
     operand_modifier: $ => /@[a-zA-Z0-9]+/,
 
-    _displacement_expression: $ => seq(
-      optional(seq($.register, ':')),
-      optional(seq($._displacement_expression_offset)),
-      '(',
-      choice(
-        $.register,
-        seq(',', $._displacement_expression_offset),
-        seq(
-          optional(choice(',', seq($.register, ','))),
+    _displacement_expression: $ => choice(
+      seq(
+        optional(seq($.register, ':')),
+        optional(seq($._displacement_expression_offset)),
+        '(',
+        choice(
           $.register,
-          optional(seq(',', $._displacement_expression_offset))
-        )
+          seq(',', $._displacement_expression_offset),
+          seq(
+            optional(choice(',', seq($.register, ','))),
+            $.register,
+            optional(seq(',', $._displacement_expression_offset))
+          )
+        ),
+        ')'
       ),
-      ')'
+      seq(
+        seq($.register, ':'),
+        seq($._displacement_expression_offset)
+      )
     ),
 
     _displacement_expression_offset: $ => prec(1, choice(
