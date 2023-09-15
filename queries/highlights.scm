@@ -8,18 +8,14 @@
 (instruction_name) @function.special
 (register) @constant.builtin
 (string) @string
-(char) @char
+(char) @constant.character
 (type) @type
 (constant "$" @constant)
 (operand_modifier) @attribute
 
 (expression
-  "-" @operator
-  "+" @operator
-  "*" @operator
-  "/" @operator
-  "=" @operator)
+  ["-" "+" "*" "/" "="] @operator)
 
-[ "(" ")" ] @punctuation.bracket
+["(" ")"] @punctuation.bracket
 
-[ "," ":" ] @punctuation.delimiter
+["," ":"] @punctuation.delimiter
