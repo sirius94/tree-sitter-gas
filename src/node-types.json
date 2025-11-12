@@ -180,6 +180,22 @@
     "fields": {}
   },
   {
+    "type": "macro_var",
+    "named": true,
+    "extra": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "symbol",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "number",
     "named": true,
     "fields": {}
@@ -235,6 +251,10 @@
     "named": false
   },
   {
+    "type": "()",
+    "named": false
+  },
+  {
     "type": ")",
     "named": false
   },
@@ -276,6 +296,10 @@
   },
   {
     "type": "@",
+    "named": false
+  },
+  {
+    "type": "\\",
     "named": false
   },
   {

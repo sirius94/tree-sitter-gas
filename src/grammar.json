@@ -324,6 +324,36 @@
         }
       ]
     },
+    "macro_var": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "\\"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "symbol"
+            },
+            {
+              "type": "STRING",
+              "value": "@"
+            },
+            {
+              "type": "STRING",
+              "value": "+"
+            },
+            {
+              "type": "STRING",
+              "value": "()"
+            }
+          ]
+        }
+      ]
+    },
     "instruction": {
       "type": "SEQ",
       "members": [
@@ -863,6 +893,10 @@
     {
       "type": "SYMBOL",
       "name": "comment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "macro_var"
     }
   ],
   "conflicts": [],

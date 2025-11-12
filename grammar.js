@@ -1,7 +1,7 @@
 module.exports = grammar({
   name: 'gas',
 
-  extras: $ => [$._inline_space, $.comment],
+  extras: $ => [$._inline_space, $.comment, $.macro_var],
 
   rules: {
     source_file: $ => seq(
@@ -66,6 +66,13 @@ module.exports = grammar({
       $.number,
       $._paren_expression
     ),
+
+    macro_var: $ => seq('\\', choice(
+      $.symbol,
+      '@',
+      '+',
+      '()'
+    )),
 
     instruction: $ => seq(
       optional(seq($.instruction_prefix, $._inline_space)),

@@ -1,9 +1,9 @@
 (comment) @comment
 (number) @constant.numeric
 (directive_name) @keyword.directive
+(macro_var) @variable
 (symbol) @variable
 (label) @function
-(label)
 (instruction_prefix) @keyword
 (instruction_name) @function.special
 (register) @constant.builtin
