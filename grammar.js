@@ -20,7 +20,7 @@ module.exports = grammar({
       $.assignment
     ),
 
-    label: $ => /[a-zA-Z_\.\$][a-zA-Z0-9_\.\$]*:/,
+    label: $ => /([0-9]+\$?|[a-zA-Z_\.\$][a-zA-Z0-9_\.\$]*):/,
 
     directive: $ => seq(
       $.directive_name,
