@@ -81,6 +81,10 @@
           "named": true
         },
         {
+          "type": "keyword",
+          "named": true
+        },
+        {
           "type": "number",
           "named": true
         },
@@ -304,6 +308,10 @@
   },
   {
     "type": "directive_name",
+    "named": true
+  },
+  {
+    "type": "keyword",
     "named": true
   },
   {

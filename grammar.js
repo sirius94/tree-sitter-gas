@@ -33,14 +33,14 @@ module.exports = grammar({
 
     directive_name: $ => /\.[a-zA-Z_\.\$][a-zA-Z0-9_\.\$]*/,
 
-    _directive_arg: $ => choice(
+    _directive_arg: $ => seq(choice(
       $.symbol, 
       $.type, 
       $.char, 
       $.string, 
       $.number, 
       $.expression
-    ),
+    ), optional(alias(token(seq(':', choice('req', 'vararg'))), $.keyword))),
 
     type: $ => seq('@', $._identifier),
 

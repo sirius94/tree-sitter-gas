@@ -1,0 +1,48 @@
+================================================================================
+required args
+================================================================================
+.macro foo, x:req
+.endm
+.macro foo, x :req
+.endm
+--------------------------------------------------------------------------------
+(source_file
+  (directive
+    (directive_name)
+    (symbol)
+    (symbol)
+    (keyword))
+  (directive
+    (directive_name))
+  (directive
+    (directive_name)
+    (symbol)
+    (symbol)
+    (keyword))
+  (directive
+    (directive_name)))
+
+================================================================================
+varargs
+================================================================================
+.macro foo, x:vararg
+.endm
+.macro foo, x :vararg
+.endm
+--------------------------------------------------------------------------------
+(source_file
+  (directive
+    (directive_name)
+    (symbol)
+    (symbol)
+    (keyword))
+  (directive
+    (directive_name))
+  (directive
+    (directive_name)
+    (symbol)
+    (symbol)
+    (keyword))
+  (directive
+    (directive_name)))
+ 
