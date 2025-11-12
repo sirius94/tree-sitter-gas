@@ -12,7 +12,8 @@
       "injection-regex": "^gas$",
       "class-name": "TreeSitterGas",
       "injections": "queries/injections.scm",
-      "highlights": "queries/highlights.scm"
+      "highlights": "queries/highlights.scm",
+      "tags": "queries/tags.scm"
     }
   ],
   "metadata": {
