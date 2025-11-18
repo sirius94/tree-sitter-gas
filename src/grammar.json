@@ -117,7 +117,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "_inline_space"
+                  "name": "_token_sep"
                 },
                 {
                   "type": "SYMBOL",
@@ -253,20 +253,16 @@
           "name": "symbol"
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_inline_space"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "comment"
-              }
-            ]
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_token_sep"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -412,7 +408,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_inline_space"
+                  "name": "_token_sep"
                 }
               ]
             },
@@ -438,7 +434,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "_inline_space"
+                  "name": "_token_sep"
                 },
                 {
                   "type": "CHOICE",
@@ -880,6 +876,22 @@
     "register": {
       "type": "PATTERN",
       "value": "%[a-zA-Z][a-zA-Z0-9]*"
+    },
+    "_token_sep": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_inline_space"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "comment"
+          }
+        ]
+      }
     },
     "comment": {
       "type": "CHOICE",

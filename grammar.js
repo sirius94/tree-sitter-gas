@@ -25,7 +25,7 @@ module.exports = grammar({
     directive: $ => seq(
       $.directive_name,
       optional(seq(
-        $._inline_space,
+        $._token_sep,
         $._directive_arg,
         repeat(seq(',', optional($._directive_arg)))
       ))
@@ -46,7 +46,7 @@ module.exports = grammar({
 
     assignment: $ => seq(
       $.symbol,
-      repeat(choice($._inline_space, $.comment)),
+      optional($._token_sep),
       '=',
       $.expression
     ),
@@ -75,10 +75,10 @@ module.exports = grammar({
     )),
 
     instruction: $ => seq(
-      optional(seq($.instruction_prefix, $._inline_space)),
+      optional(seq($.instruction_prefix, $._token_sep)),
       alias($.symbol, $.instruction_name),
       optional(seq(
-        $._inline_space,
+        $._token_sep,
         optional('*'),
         $._operand,
         repeat(seq(',', $._operand))
@@ -157,6 +157,8 @@ module.exports = grammar({
     _identifier: $ => /[a-zA-Z_\.\$][a-zA-Z0-9_\.\$]*/,
 
     register: $ => /%[a-zA-Z][a-zA-Z0-9]*/,
+
+    _token_sep: $ => repeat1(choice($._inline_space, $.comment)),
 
     comment: $ => choice(
       /#[^\n]*/,

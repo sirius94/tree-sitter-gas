@@ -73,6 +73,10 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "directive_name",
           "named": true
         },
@@ -136,6 +140,10 @@
       "types": [
         {
           "type": "char",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         },
         {
