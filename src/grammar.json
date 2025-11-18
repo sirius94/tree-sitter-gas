@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "gas",
   "rules": {
     "source_file": {
@@ -99,7 +100,7 @@
     },
     "label": {
       "type": "PATTERN",
-      "value": "[a-zA-Z_\\.\\$][a-zA-Z0-9_\\.\\$]*:"
+      "value": "([0-9]+\\$?|[a-zA-Z_\\.\\$][a-zA-Z0-9_\\.\\$]*):"
     },
     "directive": {
       "type": "SEQ",
@@ -116,7 +117,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "_inline_space"
+                  "name": "_token_sep"
                 },
                 {
                   "type": "SYMBOL",
@@ -160,31 +161,74 @@
       "value": "\\.[a-zA-Z_\\.\\$][a-zA-Z0-9_\\.\\$]*"
     },
     "_directive_arg": {
-      "type": "CHOICE",
+      "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "symbol"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "symbol"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "type"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "char"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "string"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "number"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "expression"
+            }
+          ]
         },
         {
-          "type": "SYMBOL",
-          "name": "type"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "char"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "string"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "number"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "expression"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": ":"
+                    },
+                    {
+                      "type": "CHOICE",
+                      "members": [
+                        {
+                          "type": "STRING",
+                          "value": "req"
+                        },
+                        {
+                          "type": "STRING",
+                          "value": "vararg"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "named": true,
+              "value": "keyword"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -209,20 +253,16 @@
           "name": "symbol"
         },
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_inline_space"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "comment"
-              }
-            ]
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_token_sep"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -323,6 +363,36 @@
         }
       ]
     },
+    "macro_var": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "\\"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "symbol"
+            },
+            {
+              "type": "STRING",
+              "value": "@"
+            },
+            {
+              "type": "STRING",
+              "value": "+"
+            },
+            {
+              "type": "STRING",
+              "value": "()"
+            }
+          ]
+        }
+      ]
+    },
     "instruction": {
       "type": "SEQ",
       "members": [
@@ -338,7 +408,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "_inline_space"
+                  "name": "_token_sep"
                 }
               ]
             },
@@ -364,7 +434,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "_inline_space"
+                  "name": "_token_sep"
                 },
                 {
                   "type": "CHOICE",
@@ -807,6 +877,22 @@
       "type": "PATTERN",
       "value": "%[a-zA-Z][a-zA-Z0-9]*"
     },
+    "_token_sep": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_inline_space"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "comment"
+          }
+        ]
+      }
+    },
     "comment": {
       "type": "CHOICE",
       "members": [
@@ -862,12 +948,16 @@
     {
       "type": "SYMBOL",
       "name": "comment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "macro_var"
     }
   ],
   "conflicts": [],
   "precedences": [],
   "externals": [],
   "inline": [],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }
-

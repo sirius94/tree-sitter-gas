@@ -1,7 +1,7 @@
 module.exports = grammar({
   name: 'gas',
 
-  extras: $ => [$._inline_space, $.comment],
+  extras: $ => [$._inline_space, $.comment, $.macro_var],
 
   rules: {
     source_file: $ => seq(
@@ -20,12 +20,12 @@ module.exports = grammar({
       $.assignment
     ),
 
-    label: $ => /[a-zA-Z_\.\$][a-zA-Z0-9_\.\$]*:/,
+    label: $ => /([0-9]+\$?|[a-zA-Z_\.\$][a-zA-Z0-9_\.\$]*):/,
 
     directive: $ => seq(
       $.directive_name,
       optional(seq(
-        $._inline_space,
+        $._token_sep,
         $._directive_arg,
         repeat(seq(',', optional($._directive_arg)))
       ))
@@ -33,20 +33,20 @@ module.exports = grammar({
 
     directive_name: $ => /\.[a-zA-Z_\.\$][a-zA-Z0-9_\.\$]*/,
 
-    _directive_arg: $ => choice(
+    _directive_arg: $ => seq(choice(
       $.symbol, 
       $.type, 
       $.char, 
       $.string, 
       $.number, 
       $.expression
-    ),
+    ), optional(alias(token(seq(':', choice('req', 'vararg'))), $.keyword))),
 
     type: $ => seq('@', $._identifier),
 
     assignment: $ => seq(
       $.symbol,
-      repeat(choice($._inline_space, $.comment)),
+      optional($._token_sep),
       '=',
       $.expression
     ),
@@ -67,11 +67,18 @@ module.exports = grammar({
       $._paren_expression
     ),
 
+    macro_var: $ => seq('\\', choice(
+      $.symbol,
+      '@',
+      '+',
+      '()'
+    )),
+
     instruction: $ => seq(
-      optional(seq($.instruction_prefix, $._inline_space)),
+      optional(seq($.instruction_prefix, $._token_sep)),
       alias($.symbol, $.instruction_name),
       optional(seq(
-        $._inline_space,
+        $._token_sep,
         optional('*'),
         $._operand,
         repeat(seq(',', $._operand))
@@ -150,6 +157,8 @@ module.exports = grammar({
     _identifier: $ => /[a-zA-Z_\.\$][a-zA-Z0-9_\.\$]*/,
 
     register: $ => /%[a-zA-Z][a-zA-Z0-9]*/,
+
+    _token_sep: $ => repeat1(choice($._inline_space, $.comment)),
 
     comment: $ => choice(
       /#[^\n]*/,
