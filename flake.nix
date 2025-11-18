@@ -15,6 +15,8 @@
             tree-sitter
             nodejs-slim # required by tree-sitter
             gcc
+            cargo
+            rustc
           ];
         };
       }
