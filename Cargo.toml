@@ -1,12 +1,12 @@
 [package]
-name = "tree-sitter-YOUR-LANGUAGE-NAME"
-description = "YOUR-LANGUAGE-NAME grammar for the tree-sitter parsing library"
+name = "tree_sitter_gas"
+description = "GNU assembler grammar for the tree-sitter parsing library"
 version = "0.0.1"
-keywords = ["incremental", "parsing", "YOUR-LANGUAGE-NAME"]
+keywords = ["incremental", "parsing", "asm", "gas"]
 categories = ["parsing", "text-editors"]
-repository = "https://github.com/tree-sitter/tree-sitter-YOUR-LANGUAGE-NAME"
+repository = "https://github.com/sirius94/tree-sitter-gas"
 edition = "2018"
-license = "MIT"
+license = "GPLv3"
 
 build = "bindings/rust/build.rs"
 include = [
